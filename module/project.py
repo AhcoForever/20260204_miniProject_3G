@@ -73,18 +73,32 @@ if st.session_state.page == 'home':
         if st.button('고객 유지 전략'):
             go_to_page('retention')
 
+# 구독자 분석 탭
 elif st.session_state.page == 'subscription_analysis' :
     # 뒤로가기 버튼
     if st.button("홈으로 돌아가기"):
         go_to_page('home') 
-    st.title("구독자 이탈 현상 분석")
 
+    with header_col1:
+        st.image('https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg', width=250)
+
+    with header_col2:
+        st.title('구독자 이탈 현상 분석')
+        st.text('계정 사용 기간별 분석')
+
+
+# 원인 진단 탭
 elif st.session_state.page == 'reason':
     # 뒤로가기 버튼
     if st.button("홈으로 돌아가기"):
         go_to_page('home') 
 
-    st.title("구독자 이탈 원인 진단")
+    with header_col1:
+        st.image('https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg', width=250)
+
+    with header_col2:
+        st.title('구독자 이탈 원인 진단')
+        st.text('이탈률이 가장 높은 조합과 낮은 조합을 파악하여 타겟 마케팅에 활용')
 
 
 # 기존 고객 유지 전략 페이지
@@ -98,6 +112,15 @@ elif st.session_state.page =='retention':
 
     with tab1:
         st.subheader('데이터 기반 고객 유지 전략')
+        with st.expander('1. 3개월 이상 구독 유지', expanded=True):
+            st.markdown('### 3개월 이상 구독 유지 고객 대상 리텐션 프로그램')
+
+            cols1, cols2 = st.columns([3,1])
+            with cols1:
+                st.write('**전략 내용**')
+                st.info('3개월 이상 구독을 유지한 고객에 한해 **구독 해지 시 1개월 무료 체험권 제공**')
+            with cols2:
+                st.metric('예상 이탈 감소','15%', delta='-15%', delta_color='inverse')
 st.divider()
 
 # ======================================================== 5. 분석 로직 =================================================================

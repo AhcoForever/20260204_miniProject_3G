@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-
+# 민영 수정
 # ======================================================== 1.페이지 설정 =============================================================
 
 st.set_page_config(
@@ -44,12 +44,60 @@ with st.sidebar:
 # ======================================================== 4. 메인화면 구성=============================================================
 
 header_col1, header_col2 = st.columns([1.5, 6])
-with header_col1:
-    st.image('https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg', width=250)
+col1, col2, col3 = st.columns(3)
+# 페이지 상태 초기화
+if 'page' not in st.session_state:
+    st.session_state.page='home'
+# 페이지 전환 함수 
+def go_to_page(page_name):
+    st.session_state.page = page_name
 
-with header_col2:
-    st.title('넷플릭스 구독자 현황 분석')
-    st.text('💡 데이터로 추적하는 넷플릭스 구독자들의 이탈 신호와 유지 전략')
+# 메인 화면
+if st.session_state.page == 'home':
+    with header_col1:
+        st.image('https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg', width=250)
+
+    with header_col2:
+        st.title('넷플릭스 구독자 현황 분석')
+        st.text('💡 데이터로 추적하는 넷플릭스 구독자들의 이탈 신호와 유지 전략')
+
+    with col1 : 
+        if st.button('구독자 이탈 현상 분석'):
+            go_to_page('subscription_analysis')
+
+    with col2 : 
+        if st.button('구독자 이탈 원인 진단'):
+            go_to_page('reason')       
+
+    with col3 : 
+        if st.button('고객 유지 전략'):
+            go_to_page('retention')
+
+elif st.session_state.page == 'subscription_analysis' :
+    # 뒤로가기 버튼
+    if st.button("홈으로 돌아가기"):
+        go_to_page('home') 
+    st.title("구독자 이탈 현상 분석")
+
+elif st.session_state.page == 'reason':
+    # 뒤로가기 버튼
+    if st.button("홈으로 돌아가기"):
+        go_to_page('home') 
+
+    st.title("구독자 이탈 원인 진단")
+
+
+# 기존 고객 유지 전략 페이지
+elif st.session_state.page =='retention':
+
+    # 뒤로가기 버튼
+    if st.button("홈으로 돌아가기"):
+        go_to_page('home')
+    st.title("기존 고객 유지 전략 분석")
+    tab1, tab2, tab3 = st.tabs(["전략 1: 마케팅 분야", "전략 2: 라이브 스트리밍 콘텐츠 생성", "전략 3: 번들링 및 결합 상품 확대"])
+
+    with tab1:
+        st.subheader('데이터 기반 고객 유지 전략')
 st.divider()
 
 # ======================================================== 5. 분석 로직 =================================================================
@@ -84,3 +132,4 @@ if analysis:
             st.caption("(이탈률): 위기 신호 지표")
 
         st.divider()
+

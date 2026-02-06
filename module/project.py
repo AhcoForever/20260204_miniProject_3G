@@ -107,12 +107,20 @@ elif st.session_state.page =='retention':
     # 뒤로가기 버튼
     if st.button("홈으로 돌아가기"):
         go_to_page('home')
-    st.title("기존 고객 유지 전략 분석")
-    tab1, tab2, tab3 = st.tabs(["전략 1: 마케팅 분야", "전략 2: 라이브 스트리밍 콘텐츠 생성", "전략 3: 번들링 및 결합 상품 확대"])
 
+    with header_col1:
+        st.image('https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg', width=250)
+
+    with header_col2:
+        st.title('기존 고객 유지 전략 분석')
+        st.text('기존 고객 유지를 위한 전략 및 이탈 방지 시뮬레이션')
+
+    tab1, tab2, tab3 = st.tabs(["전략 1: 마케팅 분야", "전략 2: 서비스 모델의 변화", "전략 3: 유통 및 플랫폼 전략"])
+
+    # 전략 1: 3개월 구도 유지 시 혜택
     with tab1:
         st.subheader('데이터 기반 고객 유지 전략')
-        with st.expander('1. 3개월 이상 구독 유지', expanded=True):
+        with st.expander('1. 3개월 이상 구독 유지 혜택 제공', expanded=True):
             st.markdown('### 3개월 이상 구독 유지 고객 대상 리텐션 프로그램')
 
             cols1, cols2 = st.columns([3,1])
@@ -121,6 +129,34 @@ elif st.session_state.page =='retention':
                 st.info('3개월 이상 구독을 유지한 고객에 한해 **구독 해지 시 1개월 무료 체험권 제공**')
             with cols2:
                 st.metric('예상 이탈 감소','15%', delta='-15%', delta_color='inverse')
+            st.write("")
+            st.write("**기대 효과:**")
+            st.markdown(
+                """
+                - 해지 시점에 인센티브 제공으로 재가입 유도
+                - 브랜드 충성도 강화
+                """
+            )
+            st.write('**실행 방안:**')
+            st.markdown(
+                """
+                1. 해지 버튼 클릭 시 팝업으로 "1개월 무료 혜택" 제안
+                2. 해지 완료 후 재가입 유도 이메일 발송
+                3. 3개월 구독 유지 시 자동으로 혜택 안내
+                """
+            )
+            st.image("data/1month_benefit.png", width = 400)
+
+    # 전략 2: 라이브 스트리밍
+    with tab2 : 
+        st.subheader('VOD에서 라이브 스트리밍으로의 확장')
+        with st.expander('2. 라이브 스트리밍 컨텐츠 추가', expanded=True):
+            st.markdown('### 3개월 이상 구독 유지 고객 대상 리텐션 프로그램')
+    # 전략 3: 번들링 및 결합 상품 확대
+    with tab3 : 
+        st.subheader('번들링 및 결합 상품 확대')
+        with st.expander('3. 번들링 및 결합 상품 확대', expanded=True):
+            st.markdown('### 3개월 이상 구독 유지 고객 대상 리텐션 프로그램')
 st.divider()
 
 # ======================================================== 5. 분석 로직 =================================================================

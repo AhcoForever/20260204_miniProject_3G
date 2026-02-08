@@ -91,6 +91,18 @@ if st.session_state.page == 'home':
         if st.button('고객 유지 전략'):
             go_to_page('retention')
 
+    st.markdown("---")
+    st.subheader("📊 넷플릭스 구독자 현황 스냅샷")
+
+    metric_col1, metric_col2, metric_col3, metric_col4 = st.columns(4)
+    with metric_col1:
+        st.metric("전체 구독자", "1,516M", delta="+2.6%")
+    with metric_col2:
+        st.metric("평균 유지기간", "15.2개월", delta="+0.4개월")
+    with metric_col3:
+        st.metric("이탈률", "1.5%", delta="-0.5%", delta_color="inverse")
+    with metric_col4:
+        st.metric("위험군 비율", "10%", delta="-2%", delta_color="inverse")
 # Page1: 구독자 분석 탭
 elif st.session_state.page == 'subscription_analysis' :
     # 뒤로가기 버튼
